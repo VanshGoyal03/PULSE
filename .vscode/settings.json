@@ -1,3 +1,4 @@
+
 {
     "java.project.sourcePaths": [
         "src/main/java"
@@ -6,5 +7,12 @@
     "java.project.referencedLibraries": [
         "lib/**/*.jar"
     ],
-    "java.configuration.updateBuildConfiguration": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic",
+
+    "code-runner.runInTerminal": true,
+    "code-runner.cwd": "C:\\Users\\vansh\\Dropbox\\PULSE",
+    "code-runner.executorMap": {
+        "java": "New-Item -ItemType Directory -Force target/classes | Out-Null; $files = Get-ChildItem -Path src/main/java -Recurse -Filter *.java | ForEach-Object { $_.FullName }; javac -encoding UTF-8 -cp \"lib/*\" -d target/classes $files; if ($LASTEXITCODE -eq 0) { java -cp \"target/classes;src/main/resources;lib/*\" pulse.PulseMain }"
+    }
 }
+
