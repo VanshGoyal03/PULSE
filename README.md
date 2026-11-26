@@ -220,23 +220,6 @@ Status changed: OPEN -> IN_PROGRESS. Worker thread notified.
 
 ---
 
-## 13. Important Viva Questions & Answers
-
-1. **Why is `Incident` an `abstract` class instead of an interface?**  
-   Because all incidents share common state (ID, title, priority, status, timestamps) and concrete methods (`getDetailedReport()`, getters/setters), while forcing subclasses to override category-specific behavior (`getEstimatedResolutionMinutes()`, `getSpecificDetails()`).
-2. **How do you prevent race conditions when assigning incidents?**  
-   `dispatchNextIncident()` and `resolveIncident()` in `DispatchManager` are `synchronized`, and `Technician.assignIncident()` is `synchronized`, ensuring atomic check-and-assign.
-3. **Why use `while` instead of `if` around `wait()`?**  
-   To guard against spurious wakeups and verify the condition (`running && assignedIncident == null`) still holds when the thread wakes up.
-4. **Why use `ResultSet.wasNull()` in JDBC?**  
-   `rs.getInt("assigned_technician_id")` returns `0` when the database column is `NULL`. Calling `rs.wasNull()` distinguishes an actual `0` from SQL `NULL`.
-5. **What is the time complexity of `PriorityQueue` and `HashMap` operations?**  
-   `PriorityQueue` `offer()`/`poll()` is $O(\log n)$; `HashMap` `get()`/`put()` in `TechnicianManager` is $O(1)$ average case.
-6. **Why avoid hardcoding database passwords?**  
-   Hardcoding credentials exposes secrets in source control. Reading from `application.properties` (excluded via `.gitignore`) keeps credentials externalized.
-
----
-
 ## 14. Future Scope
 
 - JavaFX or Swing desktop GUI / REST API layer.
