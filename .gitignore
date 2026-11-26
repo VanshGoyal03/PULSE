@@ -8,6 +8,8 @@ bin/
 # Sensitive configuration
 src/main/resources/application.properties
 application.properties
+*.properties
+!src/main/resources/application.properties.example
 
 # Local MySQL driver lib (if running without Maven)
 lib/*.jar
